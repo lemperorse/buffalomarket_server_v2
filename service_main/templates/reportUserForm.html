@@ -1,0 +1,53 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+{% block content %}
+    <div id="#app_django"   >
+    {{ block.super }}
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script >
+
+window.addEventListener("load", function(){
+
+  var sel = document.getElementById('id_province');
+            sel.length = 0;
+    var amphur = document.getElementById('id_amphur')
+     amphur.length = 0;
+        var district = document.getElementById('id_district')
+     district.length = 0;
+});
+
+    document.getElementById("id_geo").onchange = function() {myFunction()};
+    async function myFunction() {
+        let geo =  document.getElementById("id_geo").value
+        if(geo){
+               var sel = document.getElementById('id_province');
+            sel.length = 0;
+
+            let province  = await getHttp(geo);
+
+
+            for (let i =0; i < (province).length; i++){
+                   var option = document.createElement("option");
+                     option.text = province[i].name;
+                     option.value = province[i].id;
+                        sel.add(option);
+            }
+
+
+        }
+        console.log(geo)
+
+    }
+
+
+    async function getHttp(geo){
+        let data = await axios.get('/api/default/province/?geo='+geo);
+        return data.data;
+    }
+
+  </script>
+
+{% endblock %}

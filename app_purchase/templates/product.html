@@ -1,0 +1,72 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+
+{% load static %}
+
+<!-- Override extrahead to add Chart.js -->
+{% block extrahead %}
+    {{ block.super }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- Render the rest of the ChangeList view -->
+    {{ block.super }}
+    <script>
+        $(document).ready(function () {
+             checkPurchase();
+             checkPriceType();
+
+
+        });
+
+
+        function checkPriceType(){
+            let price = $('#id_price_type option:selected')
+            priceHidden(price.val());
+        }
+
+         $("#id_price_type").change(function () {
+
+            checkPriceType()
+        });
+
+        function priceHidden(data){
+               if (data == 'True') {
+                $('.field-price').show();
+                $('.field-price_start').hide();
+                $('.field-price_end').hide();
+            } else {
+                $('.field-price').hide();
+                $('.field-price_start').show();
+                $('.field-price_end').show();
+            }
+        }
+
+
+
+
+        function checkPurchase(){
+            let product = $('#id_product_type option:selected')
+            purchaseHidden(product.val());
+        }
+
+        $("#id_product_type ").change(function () {
+            checkPurchase()
+        });
+
+        function purchaseHidden(data) {
+            if (data == 0) {
+                $('.field-sell_type').show();
+                $('.field-buy_date').hide();
+            } else {
+                $('.field-sell_type').hide();
+                $('.field-buy_date').show();
+            }
+        }
+    </script>
+{% endblock %}

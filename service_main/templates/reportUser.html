@@ -1,0 +1,52 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+
+
+{% load static %}
+
+<!-- Override extrahead to add Chart.js -->
+{% block extrahead %}
+{{ block.super }}
+   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+<!-- Render our chart -->
+<div id="app" style="width: 100%;">
+
+<v-btn>Hello</v-btn>
+
+
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-apexcharts@1.6.0/dist/vue-apexcharts.min.js"></script>
+  <script>
+Vue.use(VueApexCharts)
+Vue.component('apexchart', VueApexCharts)
+
+  new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data:()=>{
+          return ({
+
+          });
+      },
+    async created(){
+
+    }
+    })
+  </script>
+
+
+
+<!-- Render the rest of the ChangeList view -->
+{{ block.super }}
+{% endblock %}

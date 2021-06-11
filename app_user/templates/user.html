@@ -1,0 +1,55 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+
+{% load static %}
+
+<!-- Override extrahead to add Chart.js -->
+{% block extrahead %}
+    {{ block.super }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- Render the rest of the ChangeList view -->
+    {{ block.super }}
+    <script>
+        $(document).ready(function () {
+            onRunUser();
+        });
+
+        $("#id_profile-0-local").change(function () {
+            onRunUser();
+        })
+
+        $('#id_local').change(function () {
+            onRunFarm();
+        })
+
+        function onRunFarm() {
+            let foreigner = $('#id_local').is(':checked');
+            switchForm(foreigner);
+        }
+
+        function onRunUser() {
+            let foreigner = $('#id_profile-0-local').is(':checked');
+            switchForm(foreigner);
+        }
+
+        function switchForm(checked) {
+            let form = ['field-geo', 'field-province', 'field-amphur', 'field-district']
+            $.each(form, function (index, className) {
+                if (checked) {
+                    $('.' + className).hide();
+                } else {
+                    $('.' + className).show();
+                }
+            });
+        }
+
+
+    </script>
+{% endblock %}
