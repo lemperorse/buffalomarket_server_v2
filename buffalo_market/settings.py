@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from .config import order_admin, database, language, lib_map
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,10 +75,12 @@ MIDDLEWARE = [
     'drf_api_logger.middleware.api_logger_middleware.APILoggerMiddleware'
 
 ]
+# ABSOLUTE_URL = 'http://xnxx.com'
 LOCATION_FIELD = lib_map.LOCATION_FIELD
 CORS_ALLOW_ALL_ORIGINS = True
 DRF_API_LOGGER_DATABASE = True
 REST_FRAMEWORK = {
+    'UPLOADED_FILES_USE_URL': False,
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -155,7 +157,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'https://www.buffalomarket.agri.up.ac.th/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
