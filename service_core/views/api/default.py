@@ -10,7 +10,11 @@ from service_main.models import Category, CategoryDetail, Product, Geography, Pr
 from rest_framework import generics,filters
 
 from service_main.services.filter import ProductFilter
-
+from rest_framework.pagination import PageNumberPagination
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 20
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
 
 class MapViewSet(ModelViewSet):
     queryset = Map.objects.order_by('pk')
@@ -34,7 +38,8 @@ class CategoryFullViewSet(ModelViewSet):
 
 
 class ProductViewSet(ModelViewSet):
-    queryset = Product.objects.order_by('pk')
+   
+    queryset = Product.objects.order_by('pk') 
     serializer_class = ProductSerializer
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     filter_class = ProductFilter
@@ -45,6 +50,7 @@ class ProductFileViewSet(ModelViewSet):
     serializer_class = ProductFileSerializer
 
 class ProductFullViewSet(ModelViewSet):
+    pagination_class = StandardResultsSetPagination
     queryset = Product.objects.order_by('pk')
     serializer_class = ProductFullSerializer
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
