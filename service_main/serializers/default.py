@@ -77,9 +77,21 @@ class FarmFullSerializer(ModelSerializer):
     province = ProvinceSerializer(read_only=True)
     amphur = AmphurSerializer(read_only=True)
     district = DistrictSerializer(read_only=True)
+    user_image = SerializerMethodField(read_only=True)
     class Meta:
         model = Farm
         fields = '__all__'
+    def get_user_image(self,obj):
+        user = obj.user.id
+        try:
+            profile = Profile.objects.get(user=user)
+            profile = ProfileFullSerializer(profile)
+            return profile.data["profile_image"]
+        except:
+            return None
+
+
+
 
 class ProductFullSerializer(ModelSerializer):
     category = CategoryDetailSerializer(read_only=True, many=True)

@@ -34,6 +34,7 @@ class Category(models.Model):
         verbose_name = _("ประเภทสินค้า")
         verbose_name_plural = _("ประเภทสินค้า")
     name = models.CharField(max_length=255,verbose_name="ชื่อประเภทสินค้า")
+    image = models.ImageField(upload_to='category/',blank=True,null=True,verbose_name="รูปประเภท")
     enabled = models.BooleanField(default=True,verbose_name="เปิดการใช้งาน")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -80,6 +81,7 @@ class Product(models.Model):
     buy_date = models.DateField(null=True,blank=True,verbose_name="วันที่ปิดการขาย *ประกาศซื้อ")
     status =  models.IntegerField(null=True,blank=True,choices=productStatus,verbose_name="สถานะสินค้า")
     enabled = models.BooleanField(default=True,verbose_name="เปิดการใช้งาน")
+    end_date = models.DateField(null=True, blank=True, verbose_name="วันที่ส่งมอบ *ประกาศซื้อ")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
