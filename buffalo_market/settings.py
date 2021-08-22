@@ -30,7 +30,12 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+   'admin_interface', 
+    'colorfield',
+    #...
     'django.contrib.admin',
+
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -49,6 +54,7 @@ INSTALLED_APPS = [
     'location_field.apps.DefaultConfig',
     'admin_reorder',
     'rest_auth',
+    'revproxy',
 'django_seed',
     'drf_generators',
     'service_core',
@@ -75,6 +81,10 @@ MIDDLEWARE = [
     'drf_api_logger.middleware.api_logger_middleware.APILoggerMiddleware'
 
 ]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+SILENCED_SYSTEM_CHECKS = ['security.W019']
+
 # ABSOLUTE_URL = 'http://xnxx.com'
 LOCATION_FIELD = lib_map.LOCATION_FIELD
 CORS_ALLOW_ALL_ORIGINS = True

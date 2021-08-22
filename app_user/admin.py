@@ -35,10 +35,8 @@ class MyUserAdmin(UserAdmin):
     )
     list_display = ('username','first_name', 'last_name','address','is_superuser','is_staff','is_active')
     list_filter = (
-        ('is_superuser', DropdownFilter),
-        ('is_staff', DropdownFilter),
-        ('is_active', DropdownFilter),
-        ('profile__local', DropdownFilter),
+        "is_superuser","is_staff","is_active","profile__local",
+        
         ('profile__geo', RelatedOnlyDropdownFilter),
         ('profile__province', RelatedOnlyDropdownFilter),
         ('profile__amphur', RelatedOnlyDropdownFilter),
@@ -60,7 +58,7 @@ class ShopAdmin(admin.ModelAdmin):
     list_display = ( 'name', 'owner', 'address', 'groupFull')
     list_filter = (
         ('group', RelatedOnlyDropdownFilter),
-        ('local', DropdownFilter),
+        "local",
         ('geo', RelatedOnlyDropdownFilter),
         ('province', RelatedOnlyDropdownFilter),
         ('amphur', RelatedOnlyDropdownFilter),

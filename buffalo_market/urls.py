@@ -18,6 +18,9 @@ from django.urls import include, path
 from django_restful_admin import admin as api_admin
 from django.conf.urls.static import static
 from django.conf import settings
+from revproxy.views import ProxyView
+from django.conf.urls import url
+from django.shortcuts import redirect
 
 admin.site.site_header = 'ระบบหลังบ้าน ตลาดควาย'
 
@@ -29,4 +32,10 @@ urlpatterns = [
     path('api/user/', include('service_core.urls.user')),
     path('api/admin/', include('service_core.urls.admin')),
     path('api/', include('service_core.urls.guest')),
-]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
+    url(r'^buffalo_market_typescript/(?P<path>.*)$' , ProxyView.as_view(upstream='https://lemperorse.github.io/buffalo_market_typescript/') ),
+     path('', lambda request: redirect('buffalo_market_typescript/', permanent=True)),
+]
+# + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
