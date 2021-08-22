@@ -19,6 +19,8 @@ from django_restful_admin import admin as api_admin
 from django.conf.urls.static import static
 from django.conf import settings
 
+admin.site.site_header = 'ระบบหลังบ้าน ตลาดควาย'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('chaining/', include('smart_selects.urls')),
