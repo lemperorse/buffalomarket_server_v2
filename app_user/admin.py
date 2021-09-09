@@ -65,6 +65,7 @@ class ShopAdmin(admin.ModelAdmin):
         ('district', RelatedOnlyDropdownFilter),
     )
     change_form_template = 'user.html'
+    change_list_template = 'reportMap.html'
     add_form_template = 'user.html'
     # inlines = ProductInline,
 admin.site.register(Shop,ShopAdmin)

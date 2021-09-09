@@ -163,8 +163,12 @@ class Farm(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        try:
+            return self.name
+        except:
+            return "-"
 
+        
     @property
     def address(self):
         try:
@@ -181,7 +185,10 @@ class Farm(models.Model):
 
     @property
     def groupFull(self):
-        return self.group.name
+        try:
+           return self.group.name
+        except:
+            return "-"
     groupFull.fget.short_description = 'กลุ่มเกษตรกร'
 
 class Social(models.Model):

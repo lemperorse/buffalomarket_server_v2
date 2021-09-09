@@ -7,6 +7,7 @@ from django.db import models
 from service_core.views.admin.Report import index
 
 
+
 class DummyModel(models.Model):
     class Meta:
         verbose_name = 'Link to my shiny custom view'
